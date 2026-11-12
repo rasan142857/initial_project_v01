@@ -1,143 +1,171 @@
 <!DOCTYPE html>
+<!--
+  index.html = STRUCTURE.
+  It holds the content of the page (text, headings, buttons, inputs)
+  and says what each piece IS. It does not decide how things look
+  (that is styles.css) or how they behave (that is script.js).
+-->
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>One page, three files</title>
 
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
-
-    <title>Bottles for Good</title>
-
-    <link rel="stylesheet" href="style.css">
+  <!-- This line connects styles.css to this page. Remove it and the page turns plain. -->
+  <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
+  <header>
+    <h1>One page, three files</h1>
+    <p class="lead">
+      You are looking at a web page built from <b class="t-html">index.html</b>,
+      <b class="t-css">styles.css</b> and <b class="t-js">script.js</b>.
+      Each section below explains one file and lets you try it.
+    </p>
+    <!-- script.js listens for clicks on this button (id="xray-toggle") -->
+    <button id="xray-toggle" type="button" aria-pressed="false">Turn on X-ray view</button>
+    <p class="hint" id="xray-note">X-ray view draws a dashed box around each HTML element. The box is CSS. The switch is JavaScript. The elements are HTML.</p>
+  </header>
 
-    <!-- Navigation -->
-    <header>
-        <h1>Bottles for Good</h1>
+  <main>
 
-        <nav>
-            <a href="#about">About</a>
-            <a href="#impact">Our Impact</a>
-            <a href="#collection">Collection</a>
-            <a href="#contact">Contact</a>
-        </nav>
-    </header>
+    <!-- ===================== 1. HTML ===================== -->
+    <section class="file file-html" id="html">
+      <h2>1. index.html: what is on the page</h2>
+      <p>
+        HTML is a set of <b>elements</b>. Each element has an opening tag, content, and a closing tag.
+        The tag tells the browser what the content <em>is</em>: a heading, a paragraph, a list, a button.
+      </p>
+      <pre><code>&lt;p&gt;Hello, world&lt;/p&gt;
+ ^        ^        ^
+ |        |        closing tag
+ |        content
+ opening tag</code></pre>
 
-    <!-- Main introduction -->
-    <main>
+      <h3>Try it</h3>
+      <p>Edit the HTML on the left. The result appears on the right. Try changing <code>h2</code> to <code>h1</code>, or add a new <code>&lt;li&gt;</code>.</p>
+      <div class="split">
+        <label class="field">
+          <span>HTML you write</span>
+          <textarea id="html-editor" rows="9" spellcheck="false">&lt;h2&gt;Hello&lt;/h2&gt;
+&lt;p&gt;This is a &lt;strong&gt;paragraph&lt;/strong&gt; with a &lt;a href="#html"&gt;link&lt;/a&gt;.&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;One&lt;/li&gt;
+  &lt;li&gt;Two&lt;/li&gt;
+&lt;/ul&gt;
+&lt;button&gt;I am a button&lt;/button&gt;</textarea>
+        </label>
+        <div class="field">
+          <span>What the browser shows</span>
+          <div id="html-preview" class="preview" aria-live="polite"></div>
+        </div>
+      </div>
+      <p class="rule"><b>Rule of thumb:</b> if you want to change <em>what</em> is on the page, edit <code>index.html</code>.</p>
+    </section>
 
-        <section class="hero">
-            <h2>Small actions. Big impact.</h2>
+    <!-- ===================== 2. CSS ===================== -->
+    <section class="file file-css" id="css">
+      <h2>2. styles.css: how it looks</h2>
+      <p>
+        CSS is a list of rules. Each rule picks elements (the <b>selector</b>)
+        and sets <b>properties</b> to <b>values</b>.
+      </p>
+      <pre><code>.sample-card {          &larr; selector: which elements?
+  background: #ffe9a8;  &larr; property: value
+  border-radius: 12px;  &larr; another property: value
+}</code></pre>
 
-            <p>
-                Turn your empty bottles into something
-                meaningful. Together, we can make a difference.
-            </p>
+      <h3>Try it</h3>
+      <p>Move the controls. The card below changes, and the CSS that makes the change is written out underneath.</p>
+      <div class="split">
+        <form class="controls" onsubmit="return false">
+          <label>Background colour
+            <input type="color" id="ctl-color" value="#ffe9a8">
+          </label>
+          <label>Text size: <output id="out-size">20px</output>
+            <input type="range" id="ctl-size" min="14" max="36" value="20">
+          </label>
+          <label>Corner roundness: <output id="out-radius">12px</output>
+            <input type="range" id="ctl-radius" min="0" max="48" value="12">
+          </label>
+        </form>
+        <div class="stage">
+          <div class="sample-card" id="sample-card">I am styled by CSS</div>
+        </div>
+      </div>
+      <pre><code id="css-output">/* move a control to see the CSS */</code></pre>
+      <p class="rule"><b>Rule of thumb:</b> if you want to change <em>how</em> something looks (colour, size, spacing, layout), edit <code>styles.css</code>.</p>
+    </section>
 
-            <a class="button" href="#collection">
-                Get involved
-            </a>
-        </section>
+    <!-- ===================== 3. JS ===================== -->
+    <section class="file file-js" id="js">
+      <h2>3. script.js: what happens when you act</h2>
+      <p>
+        JavaScript runs instructions when something happens: a click, a key press, a typed word.
+        A typical script does three things: <b>find</b> an element, <b>listen</b> for an event, and <b>change</b> something.
+      </p>
+      <pre><code>const button = document.querySelector("#count-btn");   // 1. find
+button.addEventListener("click", () =&gt; {               // 2. listen
+  count = count + 1;
+  output.textContent = count;                           // 3. change
+});</code></pre>
 
-        <!-- About -->
-        <section id="about">
-            <h2>What is this initiative?</h2>
+      <h3>Example A: a counter</h3>
+      <div class="demo-row">
+        <button id="count-btn" type="button">Add one</button>
+        <button id="count-reset" type="button" class="quiet">Reset</button>
+        <p class="big">Count: <output id="count-out">0</output></p>
+      </div>
 
-            <p>
-                We collect recyclable bottles at school
-                and turn their value into support for charity.
-                Every contribution counts.
-            </p>
-        </section>
+      <h3>Example B: a list that grows</h3>
+      <p>Type a task and press Add. Click a task to cross it out.</p>
+      <form id="todo-form" class="demo-row">
+        <label class="grow">
+          <span class="sr">New task</span>
+          <input type="text" id="todo-input" placeholder="e.g. finish homework" autocomplete="off">
+        </label>
+        <button type="submit">Add</button>
+      </form>
+      <ul id="todo-list" class="todo"></ul>
 
-        <!-- How it works -->
-        <section class="steps">
-            <h2>How it works</h2>
+      <p class="log"><b>What script.js just did:</b> <span id="js-log">nothing yet. Click something above.</span></p>
+      <p class="rule"><b>Rule of thumb:</b> if you want to change <em>what happens</em> when someone uses the page, edit <code>script.js</code>.</p>
+    </section>
 
-            <div class="cards">
+    <!-- ===================== 4. CONNECTIONS ===================== -->
+    <section class="file file-all" id="together">
+      <h2>How the three files connect</h2>
+      <p>The browser opens <code>index.html</code> first. Two lines inside it pull in the other files:</p>
+      <pre><code>&lt;head&gt;
+  &lt;link rel="stylesheet" href="styles.css"&gt;   &larr; loads the CSS
+&lt;/head&gt;
+&lt;body&gt;
+  ...content...
+  &lt;script src="script.js"&gt;&lt;/script&gt;         &larr; loads the JavaScript
+&lt;/body&gt;</code></pre>
+      <p>The files find each other through names the HTML gives out: <code>id</code> and <code>class</code>.</p>
+      <pre><code>HTML:  &lt;button id="count-btn" class="quiet"&gt;Add one&lt;/button&gt;
+CSS:   .quiet { background: none; }          /* styles by class */
+JS:    document.querySelector("#count-btn")  /* finds by id */</code></pre>
 
-                <div class="card">
-                    <h3>01. Collect</h3>
-                    <p>Save your empty bottles.</p>
-                </div>
+      <table>
+        <thead>
+          <tr><th>I want to&hellip;</th><th>Open</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Change a heading or add a paragraph</td><td class="t-html">index.html</td></tr>
+          <tr><td>Make the buttons green</td><td class="t-css">styles.css</td></tr>
+          <tr><td>Make something happen on click</td><td class="t-js">script.js</td></tr>
+          <tr><td>Add a new button that does something</td><td>all three: HTML adds it, CSS styles it, JS gives it a job</td></tr>
+        </tbody>
+      </table>
+      <p class="rule">Open each of the three files in a text editor. Every one has comments (the lines starting with <code>&lt;!--</code>, <code>/*</code> or <code>//</code>) that explain the code next to them.</p>
+    </section>
 
-                <div class="card">
-                    <h3>02. Deposit</h3>
-                    <p>Bring them to our collection point.</p>
-                </div>
+  </main>
 
-                <div class="card">
-                    <h3>03. Donate</h3>
-                    <p>Support a good cause together.</p>
-                </div>
-
-            </div>
-        </section>
-
-        <!-- Statistics -->
-        <section id="impact">
-            <h2>Our Impact</h2>
-
-            <div class="cards">
-
-                <div class="card">
-                    <h3 id="bottle-count">0</h3>
-                    <p>Bottles collected</p>
-                </div>
-
-                <div class="card">
-                    <h3 id="money-raised">0</h3>
-                    <p>Money raised</p>
-                </div>
-
-            </div>
-        </section>
-
-        <!-- Collection information -->
-        <section id="collection">
-            <h2>Where and when?</h2>
-
-            <p>
-                Collection location: School collection point.
-            </p>
-
-            <p>
-                Collection period: Every school day.
-            </p>
-
-            <p>
-                Please bring clean and eligible bottles.
-            </p>
-        </section>
-
-        <!-- Contact -->
-        <section id="contact">
-            <h2>Join the initiative</h2>
-
-            <p>
-                Every bottle makes a difference.
-                Thank you for contributing!
-            </p>
-
-            <a class="button"
-               href="mailto:initiative@example.com">
-                Contact us
-            </a>
-        </section>
-
-    </main>
-
-    <!-- Footer -->
-    <footer>
-        <p>
-            Bottles for Good | School Charity Initiative
-        </p>
-    </footer>
-
-    <script src="script.js"></script>
-
+  <!-- Load JavaScript last, so the elements above already exist when it looks for them. -->
+  <script src="script.js"></script>
 </body>
 </html>
